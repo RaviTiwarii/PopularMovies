@@ -34,26 +34,32 @@ public class Movie implements Parcelable {
     private static final String TMDB_MOVIE_USER_RATING = "vote_average";
     private static final String TMDB_IMAGE_PATH = "http://image.tmdb.org/t/p/w185/";
 
-    private long mId;
-    private String mTitle = "";
-    private String mDescription = "";
-    private String mPosterPath = "";
-    private String mReleaseDate = "";
+    private final long mId;
+    private final String mTitle;
+    private final String mDescription;
+    private final String mPosterPath;
+    private final String mReleaseDate;
     private float mUserRating;
 
     /**
      * Create a new movie object with movie id
      * @param id id of the movie
      */
-    public Movie(long id) {
+    private Movie(long id, String title, String description, String posterPath,
+                  String releaseDate, float userRating) {
         mId = id;
+        mTitle = title;
+        mDescription = description;
+        mPosterPath = posterPath;
+        mReleaseDate = releaseDate;
+        mUserRating = userRating;
     }
 
     /**
      * Create a new movie object by reading values from parcel object
      * @param in parcel from which values should be read.
      */
-    public Movie(Parcel in) {
+    private Movie(Parcel in) {
         mId = in.readLong();
         mTitle = in.readString();
         mDescription = in.readString();
@@ -61,6 +67,12 @@ public class Movie implements Parcelable {
         mReleaseDate = in.readString();
         mUserRating = in.readFloat();
     }
+
+    public static Movie of(long id, String title, String description, String posterPath,
+                           String releaseDate, float userRating) {
+        return new Movie(id, title, description, posterPath, releaseDate, userRating);
+    }
+
 
     /**
      * Crate a new movie object from the json data.
@@ -77,14 +89,7 @@ public class Movie implements Parcelable {
         String releaseDate = movieJsonObject.getString(TMDB_MOVIE_RELEASE_DATE);
         float userRating = (float) movieJsonObject.getDouble(TMDB_MOVIE_USER_RATING);
 
-        Movie movie = new Movie(id);
-        movie.setTitle(title);
-        movie.setDescription(description);
-        movie.setPosterPath(posterPath);
-        movie.setReleaseDate(releaseDate);
-        movie.setUserRating(userRating);
-
-        return movie;
+        return Movie.of(id, title, description, posterPath, releaseDate, userRating);
     }
 
     //----------------------------------
@@ -98,40 +103,20 @@ public class Movie implements Parcelable {
         return mTitle;
     }
 
-    public void setTitle(String title) {
-        mTitle = title;
-    }
-
     public String getDescription() {
         return mDescription;
-    }
-
-    public void setDescription(String description) {
-        mDescription = description;
     }
 
     public String getPosterPath() {
         return TMDB_IMAGE_PATH + mPosterPath;
     }
 
-    public void setPosterPath(String posterPath) {
-        mPosterPath = posterPath;
-    }
-
     public String getReleaseDate() {
         return mReleaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        mReleaseDate = releaseDate;
-    }
-
     public float getUserRating() {
         return mUserRating;
-    }
-
-    public void setUserRating(float userRating) {
-        mUserRating = userRating;
     }
 
     @Override
