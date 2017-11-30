@@ -62,11 +62,9 @@ public class MoviesActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_popular_movie:
-                Toast.makeText(this, "Selected Popular Movies", Toast.LENGTH_SHORT).show();
                 loadMovies(SORT_TYPE_POPULAR);
                 return true;
             case R.id.action_top_rated_movie:
-                Toast.makeText(this, "Selected Popular Movies", Toast.LENGTH_SHORT).show();
                 loadMovies(SORT_TYPE_TOP_RATED);
                 return true;
             default:
