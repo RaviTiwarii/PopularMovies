@@ -29,7 +29,7 @@ public class MovieFetcher {
 
     private static final String API_KEY_PARAM = "api_key";
 
-    private Context mContext;
+    private final Context mContext;
 
     public MovieFetcher(final Context context) {
         mContext = context;
@@ -50,10 +50,6 @@ public class MovieFetcher {
     @Nullable
     private String buildUrl(final String endpoint) {
         String apiKey = mContext.getString(R.string.api_key);
-        if (apiKey == null) {
-            Log.e(TAG, "There is no api key found for TMDB API");
-            return null;
-        }
         return Uri.parse(endpoint).buildUpon()
                 .appendQueryParameter(API_KEY_PARAM, apiKey)
                 .build()
@@ -91,7 +87,6 @@ public class MovieFetcher {
         }
     }
 
-    @NonNull
     private void parseItems(@NonNull final List<Movie> movies,
                             @NonNull final JSONObject jsonBody) throws JSONException {
         JSONArray movieJsonArray = jsonBody.getJSONArray("results");

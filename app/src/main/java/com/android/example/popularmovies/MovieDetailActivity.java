@@ -2,12 +2,11 @@ package com.android.example.popularmovies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.example.popularmovies.model.Movie;
 import com.squareup.picasso.Picasso;

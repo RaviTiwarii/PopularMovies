@@ -16,14 +16,10 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     @NonNull
-    private List<Movie> mMovies;
+    private final List<Movie> mMovies;
 
     @NonNull
-    private OnListItemClickListener mListener;
-
-    public interface OnListItemClickListener {
-        void onClick(@NonNull Movie movie);
-    }
+    private final OnListItemClickListener mListener;
 
     public MovieAdapter(@NonNull final List<Movie> movies,
                         @NonNull final OnListItemClickListener listener) {
@@ -57,8 +53,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         notifyDataSetChanged();
     }
 
+    public interface OnListItemClickListener {
+        void onClick(@NonNull Movie movie);
+    }
+
     class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private ImageView mMoviePosterImageView;
+        private final ImageView mMoviePosterImageView;
 
         public MovieViewHolder(View itemView) {
             super(itemView);

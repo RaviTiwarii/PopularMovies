@@ -3,13 +3,13 @@ package com.android.example.popularmovies.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * This is a model class for movie
+ *
  * @author Ravi Tiwari
  */
 public class Movie implements Parcelable {
@@ -39,11 +39,10 @@ public class Movie implements Parcelable {
     private final String mDescription;
     private final String mPosterPath;
     private final String mReleaseDate;
-    private float mUserRating;
+    private final float mUserRating;
 
     /**
      * Create a new movie object with movie id
-     * @param id id of the movie
      */
     private Movie(long id, String title, String description, String posterPath,
                   String releaseDate, float userRating) {
@@ -57,6 +56,7 @@ public class Movie implements Parcelable {
 
     /**
      * Create a new movie object by reading values from parcel object
+     *
      * @param in parcel from which values should be read.
      */
     private Movie(Parcel in) {
@@ -76,6 +76,7 @@ public class Movie implements Parcelable {
 
     /**
      * Crate a new movie object from the json data.
+     *
      * @param movieJsonObject json object containing movie details.
      * @return movie object
      * @throws JSONException if there is any parsing error.
@@ -95,7 +96,7 @@ public class Movie implements Parcelable {
     //----------------------------------
     // Getters and Setters
     //----------------------------------
-    public long getmId() {
+    public long getId() {
         return mId;
     }
 

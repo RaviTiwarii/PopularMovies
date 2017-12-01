@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.example.popularmovies.model.Movie;
 import com.android.example.popularmovies.utilities.MovieFetcher;
@@ -22,8 +21,6 @@ import java.util.List;
 
 public class MoviesActivity extends AppCompatActivity
         implements MovieAdapter.OnListItemClickListener {
-
-    private static final String TAG = MoviesActivity.class.getSimpleName();
 
     private static final String SORT_TYPE_POPULAR = "sort-type-popular";
     private static final String SORT_TYPE_TOP_RATED = "sort-type-top-rated";
