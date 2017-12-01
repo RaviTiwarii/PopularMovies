@@ -7,11 +7,6 @@ import android.support.annotation.NonNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * This is a model class for movie
- *
- * @author Ravi Tiwari
- */
 public class Movie implements Parcelable {
 
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
@@ -41,9 +36,6 @@ public class Movie implements Parcelable {
     private final String mReleaseDate;
     private final float mUserRating;
 
-    /**
-     * Create a new movie object with movie id
-     */
     private Movie(long id, String title, String description, String posterPath,
                   String releaseDate, float userRating) {
         mId = id;
@@ -54,11 +46,6 @@ public class Movie implements Parcelable {
         mUserRating = userRating;
     }
 
-    /**
-     * Create a new movie object by reading values from parcel object
-     *
-     * @param in parcel from which values should be read.
-     */
     private Movie(Parcel in) {
         mId = in.readLong();
         mTitle = in.readString();
@@ -73,14 +60,6 @@ public class Movie implements Parcelable {
         return new Movie(id, title, description, posterPath, releaseDate, userRating);
     }
 
-
-    /**
-     * Crate a new movie object from the json data.
-     *
-     * @param movieJsonObject json object containing movie details.
-     * @return movie object
-     * @throws JSONException if there is any parsing error.
-     */
     @NonNull
     public static Movie fromJson(JSONObject movieJsonObject) throws JSONException {
         long id = movieJsonObject.getLong(TMDB_MOVIE_ID);
@@ -93,9 +72,6 @@ public class Movie implements Parcelable {
         return Movie.of(id, title, description, posterPath, releaseDate, userRating);
     }
 
-    //----------------------------------
-    // Getters and Setters
-    //----------------------------------
     public long getId() {
         return mId;
     }
