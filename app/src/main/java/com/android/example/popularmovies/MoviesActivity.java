@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.android.example.popularmovies.model.Movie;
 import com.android.example.popularmovies.model.MovieType;
+import com.android.example.popularmovies.utilities.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,9 +73,13 @@ public class MoviesActivity extends AppCompatActivity
     }
 
     private void loadMovies(@NonNull final MovieType movieType) {
-        showMoviesView();
-        fetchMovieTask = createFetchMovieTask();
-        fetchMovieTask.execute(movieType);
+        if (NetworkUtils.isInternetAvailable(this)) {
+            showMoviesView();
+            fetchMovieTask = createFetchMovieTask();
+            fetchMovieTask.execute(movieType);
+        } else {
+            showErrorView();
+        }
     }
 
     @NonNull
