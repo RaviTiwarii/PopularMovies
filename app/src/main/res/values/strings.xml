@@ -1,9 +1,19 @@
 <resources>
     <string name="app_name">Popular Movies</string>
+
+    <string name="message_network_error">An error has occurred. Please try again!</string>
+    <string name="message_empty_list">There is no item to show!</string>
+    <string name="message_added_favorites">Added To Favorites Successfully</string>
+    <string name="message_error_adding_favorites">Failed Adding To Favorites</string>
+    <string name="message_removed_favorites">Removed From Favorites Successfully</string>
+    <string name="message_error_removing_favorites">Failed Removing From Favorites</string>
+
+    <string name="tv_trailers_label">Trailers</string>
+    <string name="tv_reviews_label">Reviews</string>
+
     <string name="action_popular_movies">Popular Movies</string>
     <string name="action_top_rated_movies">Top Rated Movies</string>
-    <string name="error_message">
-        An error has occurred. Please try again by clicking one of the options on menu.
-    </string>
-    <string name="movie_poster">Poster of the movie</string>
+    <string name="action_favorite_movies">Favorite Movies</string>
+
+    <string name="description_movie_poster">Poster of the movie</string>
 </resources>
