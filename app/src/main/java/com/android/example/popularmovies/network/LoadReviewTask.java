@@ -34,11 +34,11 @@ public class LoadReviewTask extends AsyncTask<String, Void, List<Review>> {
     @Nullable
     protected List<Review> doInBackground(String... params) {
         Context context = contextReference.get();
-        if (params.length == 0 || !NetworkUtils.isInternetAvailable(context)) {
-            return null;
-        } else {
+        if (params.length != 0 && NetworkUtils.isInternetAvailable(context)) {
             String movieId = params[0];
             return new MovieFetcher(context).fetchMovieReviews(movieId);
+        } else {
+            return null;
         }
     }
 

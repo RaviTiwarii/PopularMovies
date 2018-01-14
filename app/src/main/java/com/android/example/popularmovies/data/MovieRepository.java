@@ -15,7 +15,7 @@ import java.util.List;
 
 public class MovieRepository {
 
-    private Context context;
+    private final Context context;
 
     public MovieRepository(Context context) {
         this.context = context;

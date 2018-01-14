@@ -3,6 +3,7 @@ package com.android.example.popularmovies.data;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -29,6 +30,8 @@ public class MovieProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
+        Context context = getContext();
+        assert(context != null);
         dbHelper = new MovieDbHelper(getContext());
         return true;
     }

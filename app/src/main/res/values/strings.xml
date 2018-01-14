@@ -3,7 +3,6 @@
 
     <string name="title_activity_detail_movie">Movie Detail</string>
 
-    <string name="message_network_error">An error has occurred. Please try again!</string>
     <string name="message_empty_list">There is no item to show!</string>
     <string name="message_added_favorites">Added To Favorites Successfully</string>
     <string name="message_error_adding_favorites">Failed Adding To Favorites</string>
@@ -25,4 +24,6 @@
     <string name="format_movie_rating">
         <xliff:g id="rating">%1$s</xliff:g>/10
     </string>
+    <string name="description_favorite_button">Button to add this movie in favorites</string>
+    <string name="description_play_icon">Icon of play</string>
 </resources>

@@ -17,16 +17,12 @@ import android.widget.TextView;
 import com.android.example.popularmovies.R;
 import com.android.example.popularmovies.adapter.MovieAdapter;
 import com.android.example.popularmovies.data.model.Movie;
+import com.android.example.popularmovies.data.model.MovieType;
 import com.android.example.popularmovies.network.LoadMovieTask;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MoviesActivity extends AppCompatActivity {
-    public static final String SORT_TYPE_POPULAR = "sort_type_popular";
-    public static final String SORT_TYPE_TOP_RATED = "sort_type_top_rated";
-    public static final String SORT_TYPE_FAVORITE = "sort_type_favorite";
-
     private static final String KEY_MOVIE_LIST_STATE = "key_movie_list_state";
     private static final String KEY_SORT_TYPE = "key_sort_type";
 
@@ -36,7 +32,7 @@ public class MoviesActivity extends AppCompatActivity {
     private MovieAdapter movieAdapter;
     private LoadMovieTask loadMovieTask;
     private Parcelable movieListState;
-    private String selectedSortType;
+    private String selectedMovieType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +41,7 @@ public class MoviesActivity extends AppCompatActivity {
 
         loadingIndicator = findViewById(R.id.pb_loading_indicator);
         errorMessageTextView = findViewById(R.id.tv_error_message);
-        movieRecyclerView = findViewById(R.id.recyclerview_movie);
+        movieRecyclerView = findViewById(R.id.recycler_view_movie);
 
         GridLayoutManager layoutManager;
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
@@ -60,8 +56,8 @@ public class MoviesActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (selectedSortType == null) selectedSortType = SORT_TYPE_POPULAR;
-        loadMovies(selectedSortType);
+        if (selectedMovieType == null) selectedMovieType = MovieType.POPULAR;
+        loadMovies(selectedMovieType);
 
         if (movieListState != null)
             movieRecyclerView.getLayoutManager().onRestoreInstanceState(movieListState);
@@ -85,13 +81,13 @@ public class MoviesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_popular_movies:
-                loadMovies(SORT_TYPE_POPULAR);
+                loadMovies(MovieType.POPULAR);
                 return true;
             case R.id.action_top_rated_movies:
-                loadMovies(SORT_TYPE_TOP_RATED);
+                loadMovies(MovieType.TOP_RATED);
                 return true;
             case R.id.action_favorite_movies:
-                loadMovies(SORT_TYPE_FAVORITE);
+                loadMovies(MovieType.FAVORITE);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -104,7 +100,7 @@ public class MoviesActivity extends AppCompatActivity {
 
         movieListState = movieRecyclerView.getLayoutManager().onSaveInstanceState();
         outState.putParcelable(KEY_MOVIE_LIST_STATE, movieListState);
-        outState.putString(KEY_SORT_TYPE, selectedSortType);
+        outState.putString(KEY_SORT_TYPE, selectedMovieType);
     }
 
     @Override
@@ -117,17 +113,17 @@ public class MoviesActivity extends AppCompatActivity {
             movieListState = savedInstanceState.getParcelable(KEY_MOVIE_LIST_STATE);
 
         if (savedInstanceState.containsKey(KEY_SORT_TYPE))
-            selectedSortType = savedInstanceState.getString(KEY_SORT_TYPE);
+            selectedMovieType = savedInstanceState.getString(KEY_SORT_TYPE);
     }
 
     private void startMovieDetailActivity(@NonNull final Movie movie) {
         MovieDetailActivity.start(this, movie);
     }
 
-    private void loadMovies(@NonNull final String sortType) {
-        selectedSortType = sortType;
+    private void loadMovies(@NonNull final String type) {
+        selectedMovieType = type;
         loadMovieTask = new LoadMovieTask(this, this::onPreTaskExecute, this::onTaskComplete);
-        loadMovieTask.execute(sortType);
+        loadMovieTask.execute(type);
     }
 
     private void onPreTaskExecute() {

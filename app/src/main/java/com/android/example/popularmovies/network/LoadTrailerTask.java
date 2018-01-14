@@ -34,11 +34,11 @@ public class LoadTrailerTask extends AsyncTask<String, Void, List<Trailer>> {
     @Nullable
     protected List<Trailer> doInBackground(String... params) {
         Context context = contextReference.get();
-        if (params.length == 0 || !NetworkUtils.isInternetAvailable(context)) {
-            return null;
-        } else {
+        if (params.length != 0 && NetworkUtils.isInternetAvailable(context)) {
             String movieId = params[0];
             return new MovieFetcher(context).fetchMovieTrailers(movieId);
+        } else {
+            return null;
         }
     }
 

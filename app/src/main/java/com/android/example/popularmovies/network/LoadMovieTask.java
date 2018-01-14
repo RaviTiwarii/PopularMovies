@@ -36,20 +36,20 @@ public class LoadMovieTask extends AsyncTask<String, Void, List<Movie>> {
     @Override
     protected List<Movie> doInBackground(String... params) {
         Context context = contextReference.get();
-        if (params.length == 0 || !NetworkUtils.isInternetAvailable(context)) {
-            return null;
-        } else {
+        if (params.length != 0 && NetworkUtils.isInternetAvailable(context)) {
             String movieType = params[0];
             switch (movieType) {
-                case MoviesActivity.SORT_TYPE_POPULAR:
+                case MovieType.POPULAR:
                     return new MovieFetcher(context).fetchPopularMovies();
-                case MoviesActivity.SORT_TYPE_TOP_RATED:
+                case MovieType.TOP_RATED:
                     return new MovieFetcher(context).fetchTopRatedMovies();
-                case MoviesActivity.SORT_TYPE_FAVORITE:
+                case MovieType.FAVORITE:
                     return new MovieRepository(context).findAll();
                 default:
                     throw new IllegalArgumentException("Cannot load unknown movie type " + movieType);
             }
+        } else {
+            return null;
         }
     }
 
