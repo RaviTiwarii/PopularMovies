@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,8 @@ import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 public class MovieDetailActivity extends AppCompatActivity {
 
     private static final String EXTRA_MOVIE = "extra_movie";
+    private static final String KEY_TRAILER_LIST_STATE = "key_trailer_list_state";
+    private static final String KEY_REVIEW_LIST_STATE = "key_review_list_state";
 
     private ImageView posterImageView;
     private ImageView favoriteImageView;
@@ -51,8 +54,9 @@ public class MovieDetailActivity extends AppCompatActivity {
     private ReviewAdapter reviewAdapter;
 
     private Movie movie;
-
     private MovieRepository movieRepository;
+    private Parcelable trailerListState;
+    private Parcelable reviewListState;
 
     public static void start(final Context context, @NonNull final Movie movie) {
         Intent starter = new Intent(context, MovieDetailActivity.class);
@@ -97,6 +101,46 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .execute(movie.getId());
     }
 
+    private void setupRecyclerView(RecyclerView recyclerView) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, VERTICAL));
+        recyclerView.setHasFixedSize(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (trailerListState != null)
+            trailerRecyclerView.getLayoutManager().onRestoreInstanceState(trailerListState);
+        if (reviewListState != null)
+            reviewRecyclerView.getLayoutManager().onRestoreInstanceState(reviewListState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        trailerListState = trailerRecyclerView.getLayoutManager().onSaveInstanceState();
+        outState.putParcelable(KEY_TRAILER_LIST_STATE, trailerListState);
+
+        reviewListState = reviewRecyclerView.getLayoutManager().onSaveInstanceState();
+        outState.putParcelable(KEY_REVIEW_LIST_STATE, reviewListState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if (savedInstanceState == null) return;
+
+        if (savedInstanceState.containsKey(KEY_TRAILER_LIST_STATE))
+            trailerListState = savedInstanceState.getParcelable(KEY_TRAILER_LIST_STATE);
+
+        if (savedInstanceState.containsKey(KEY_REVIEW_LIST_STATE))
+            reviewListState = savedInstanceState.getParcelable(KEY_REVIEW_LIST_STATE);
+    }
+
     private boolean isFavoriteMovie() {
         return movieRepository.findById(movie.getId()) != null;
     }
@@ -112,10 +156,10 @@ public class MovieDetailActivity extends AppCompatActivity {
         if (isRemoved) {
             favoriteImageView.setSelected(false);
             Toast.makeText(this, getString(R.string.message_removed_favorites),
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, getString(R.string.message_error_removing_favorites),
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -129,12 +173,6 @@ public class MovieDetailActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.message_error_adding_favorites),
                     Toast.LENGTH_LONG).show();
         }
-    }
-
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, VERTICAL));
-        recyclerView.setHasFixedSize(true);
     }
 
     private void setupTrailerAdapter(List<Trailer> trailers) {
@@ -166,8 +204,8 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .into(posterImageView);
 
         titleTextView.setText(movie.getTitle());
-        movieLengthTextView.setText(movie.getDuration() + "min");
-        userRatingTextView.setText(movie.getUserRating() + "/10");
+        movieLengthTextView.setText(getString(R.string.format_movie_length, movie.getLength()));
+        userRatingTextView.setText(getString(R.string.format_movie_rating, movie.getRating()));
         descriptionTextView.setText(movie.getDescription());
         releaseDateTextView.setText(movie.getReleaseDate().substring(0, 4));
     }

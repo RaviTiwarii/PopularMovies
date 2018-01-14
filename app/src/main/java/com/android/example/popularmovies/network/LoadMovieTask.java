@@ -5,13 +5,15 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.android.example.popularmovies.activity.MoviesActivity;
+import com.android.example.popularmovies.data.MovieRepository;
 import com.android.example.popularmovies.data.model.Movie;
 import com.android.example.popularmovies.data.model.MovieType;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class LoadMovieTask extends AsyncTask<MovieType, Void, List<Movie>> {
+public class LoadMovieTask extends AsyncTask<String, Void, List<Movie>> {
 
     private final WeakReference<Context> contextReference;
     private final PreTaskExecuteListener preTaskExecuteListener;
@@ -32,17 +34,19 @@ public class LoadMovieTask extends AsyncTask<MovieType, Void, List<Movie>> {
     }
 
     @Override
-    protected List<Movie> doInBackground(MovieType... params) {
+    protected List<Movie> doInBackground(String... params) {
         Context context = contextReference.get();
         if (params.length == 0 || !NetworkUtils.isInternetAvailable(context)) {
             return null;
         } else {
-            MovieType movieType = params[0];
+            String movieType = params[0];
             switch (movieType) {
-                case POPULAR:
+                case MoviesActivity.SORT_TYPE_POPULAR:
                     return new MovieFetcher(context).fetchPopularMovies();
-                case TOP_RATED:
+                case MoviesActivity.SORT_TYPE_TOP_RATED:
                     return new MovieFetcher(context).fetchTopRatedMovies();
+                case MoviesActivity.SORT_TYPE_FAVORITE:
+                    return new MovieRepository(context).findAll();
                 default:
                     throw new IllegalArgumentException("Cannot load unknown movie type " + movieType);
             }

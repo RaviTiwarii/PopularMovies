@@ -34,17 +34,17 @@ public class Movie implements Parcelable {
     private final String description;
     private final String posterPath;
     private final String releaseDate;
-    private final String userRating;
-    private String duration;
+    private final String rating;
+    private String length;
 
     private Movie(String id, String title, String description, String posterPath,
-                  String releaseDate, String userRating) {
+                  String releaseDate, String rating) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.posterPath = posterPath;
         this.releaseDate = releaseDate;
-        this.userRating = userRating;
+        this.rating = rating;
     }
 
     private Movie(Parcel in) {
@@ -53,8 +53,8 @@ public class Movie implements Parcelable {
         description = in.readString();
         posterPath = in.readString();
         releaseDate = in.readString();
-        userRating = in.readString();
-        duration = in.readString();
+        rating = in.readString();
+        length = in.readString();
     }
 
     public static Movie of(String id, String title, String description, String posterPath,
@@ -86,8 +86,8 @@ public class Movie implements Parcelable {
         dest.writeString(description);
         dest.writeString(posterPath);
         dest.writeString(releaseDate);
-        dest.writeString(userRating);
-        dest.writeString(duration);
+        dest.writeString(rating);
+        dest.writeString(length);
     }
 
     public String getId() {
@@ -114,15 +114,15 @@ public class Movie implements Parcelable {
         return releaseDate;
     }
 
-    public String getUserRating() {
-        return userRating;
+    public String getRating() {
+        return rating;
     }
 
-    public String getDuration() {
-        return duration;
+    public String getLength() {
+        return length;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setLength(String length) {
+        this.length = length;
     }
 }

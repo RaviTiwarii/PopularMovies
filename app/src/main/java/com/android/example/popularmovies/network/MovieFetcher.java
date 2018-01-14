@@ -129,7 +129,7 @@ public class MovieFetcher {
         for (int i = 0; i < movieJsonArray.length(); i++) {
             JSONObject movieJson = movieJsonArray.getJSONObject(i);
             Movie movie = Movie.fromJson(movieJson);
-            movie.setDuration(getLengthOfMovie(movie.getId()));
+            movie.setLength(getLengthOfMovie(movie.getId()));
             movies.add(movie);
         }
     }

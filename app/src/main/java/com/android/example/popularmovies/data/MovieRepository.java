@@ -71,8 +71,8 @@ public class MovieRepository {
         contentValues.put(MovieEntry.COLUMN_DESCRIPTION, movie.getDescription());
         contentValues.put(MovieEntry.COLUMN_POSTER_PATH, movie.getPosterPath());
         contentValues.put(MovieEntry.COLUMN_RELEASE_DATE, movie.getReleaseDate());
-        contentValues.put(MovieEntry.COLUMN_USER_RATING, movie.getUserRating());
-        contentValues.put(MovieEntry.COLUMN_DURATION, movie.getDuration());
+        contentValues.put(MovieEntry.COLUMN_USER_RATING, movie.getRating());
+        contentValues.put(MovieEntry.COLUMN_DURATION, movie.getLength());
         return contentValues;
     }
 
@@ -86,7 +86,7 @@ public class MovieRepository {
         String userRating = cursor.getString(cursor.getColumnIndex(MovieEntry.COLUMN_USER_RATING));
         String duration = cursor.getString(cursor.getColumnIndex(MovieEntry.COLUMN_DURATION));
         Movie movie = Movie.of(id, title, description, posterPath, releaseDate, userRating);
-        movie.setDuration(duration);
+        movie.setLength(duration);
         return movie;
     }
 }
