@@ -17,6 +17,8 @@
     <string name="action_favorite_movies">Favorite Movies</string>
 
     <string name="description_movie_poster">Poster of the movie</string>
+    <string name="description_favorite_button">Button to add this movie in favorites</string>
+    <string name="description_play_icon">Icon of play</string>
 
     <string name="format_movie_length">
         <xliff:g id="length">%1$s</xliff:g>min
@@ -24,6 +26,4 @@
     <string name="format_movie_rating">
         <xliff:g id="rating">%1$s</xliff:g>/10
     </string>
-    <string name="description_favorite_button">Button to add this movie in favorites</string>
-    <string name="description_play_icon">Icon of play</string>
 </resources>
