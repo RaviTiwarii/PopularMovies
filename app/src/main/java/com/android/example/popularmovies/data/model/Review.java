@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Review {
+
     private static final String KEY_ID = "id";
     private static final String KEY_AUTHOR = "author";
     private static final String KEY_CONTENT = "content";
@@ -28,7 +29,7 @@ public class Review {
         String id = reviewJson.getString(KEY_ID);
         String author = reviewJson.getString(KEY_AUTHOR);
         String content = reviewJson.getString(KEY_CONTENT);
-        return new Review(id, author, content);
+        return Review.of(id, author, content);
     }
 
     public String getId() {

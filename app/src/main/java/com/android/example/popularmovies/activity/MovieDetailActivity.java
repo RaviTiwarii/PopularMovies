@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.android.example.popularmovies.R;
 import com.android.example.popularmovies.adapter.ReviewAdapter;
 import com.android.example.popularmovies.adapter.TrailerAdapter;
-import com.android.example.popularmovies.data.MovieRepository;
+import com.android.example.popularmovies.data.db.MovieRepository;
 import com.android.example.popularmovies.data.model.Movie;
 import com.android.example.popularmovies.data.model.Review;
 import com.android.example.popularmovies.data.model.Trailer;

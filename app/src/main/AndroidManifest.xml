@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".activity.MoviesActivity"
             android:launchMode="singleTop">
             <intent-filter>
@@ -20,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.MovieDetailActivity"
             android:parentActivityName=".activity.MoviesActivity"
@@ -31,7 +33,7 @@
         </activity>
 
         <provider
-            android:name=".data.MovieProvider"
+            android:name=".data.db.MovieProvider"
             android:authorities="com.android.example.popularmovies"
             android:exported="false" />
     </application>

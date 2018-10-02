@@ -5,8 +5,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.android.example.popularmovies.activity.MoviesActivity;
-import com.android.example.popularmovies.data.MovieRepository;
+import com.android.example.popularmovies.data.db.MovieRepository;
 import com.android.example.popularmovies.data.model.Movie;
 import com.android.example.popularmovies.data.model.MovieType;
 

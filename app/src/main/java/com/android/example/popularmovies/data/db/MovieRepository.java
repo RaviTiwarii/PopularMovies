@@ -1,4 +1,4 @@
-package com.android.example.popularmovies.data;
+package com.android.example.popularmovies.data.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.android.example.popularmovies.data.MovieContract.MovieEntry;
+import com.android.example.popularmovies.data.db.MovieContract.MovieEntry;
 import com.android.example.popularmovies.data.model.Movie;
 
 import java.util.ArrayList;

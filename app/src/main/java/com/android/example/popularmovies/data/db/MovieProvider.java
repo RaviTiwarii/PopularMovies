@@ -1,4 +1,4 @@
-package com.android.example.popularmovies.data;
+package com.android.example.popularmovies.data.db;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -11,10 +11,10 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.android.example.popularmovies.data.MovieContract.MovieEntry;
+import com.android.example.popularmovies.data.db.MovieContract.MovieEntry;
 
-import static com.android.example.popularmovies.data.MovieContract.CONTENT_AUTHORITY;
-import static com.android.example.popularmovies.data.MovieContract.PATH_MOVIES;
+import static com.android.example.popularmovies.data.db.MovieContract.CONTENT_AUTHORITY;
+import static com.android.example.popularmovies.data.db.MovieContract.PATH_MOVIES;
 
 public class MovieProvider extends ContentProvider {
     private static final int MOVIES = 100;

@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Trailer {
+
     private static final String KEY_NAME = "name";
     private static final String KEY_KEY = "key";
 
@@ -24,7 +25,7 @@ public class Trailer {
     public static Trailer from(@NonNull JSONObject jsonTrailer) throws JSONException {
         String name = jsonTrailer.getString(KEY_NAME);
         String key = jsonTrailer.getString(KEY_KEY);
-        return new Trailer(name, key);
+        return Trailer.of(name, key);
     }
 
     public String getName() {
