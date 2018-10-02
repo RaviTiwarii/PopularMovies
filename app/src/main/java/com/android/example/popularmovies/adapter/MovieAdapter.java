@@ -63,9 +63,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         }
 
         void bind(final Movie movie) {
-            Picasso.with(mMoviePosterImageView.getContext())
-                    .load(movie.getPosterPathUrl())
-                    .into(mMoviePosterImageView);
+            Picasso.get().load(movie.getPosterPathUrl()).into(mMoviePosterImageView);
         }
 
         @Override

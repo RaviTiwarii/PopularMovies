@@ -48,6 +48,7 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         private final TextView trailerNameTextView;
 
         ViewHolder(View itemView) {

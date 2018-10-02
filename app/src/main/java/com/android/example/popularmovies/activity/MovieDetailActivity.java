@@ -82,8 +82,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         favoriteImageView = findViewById(R.id.iv_favorite);
         favoriteImageView.setOnClickListener(view -> onFavoriteClicked());
 
-        if (isFavoriteMovie()) favoriteImageView.setSelected(true);
-
         trailerRecyclerView = findViewById(R.id.rv_movie_trailers);
         setupRecyclerView(trailerRecyclerView);
         setupTrailerAdapter(new ArrayList<>());
@@ -199,9 +197,8 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void showMovieDetails() {
-        Picasso.with(this)
-                .load(movie.getPosterPathUrl())
-                .into(posterImageView);
+        Picasso.get().load(movie.getPosterPathUrl()).into(posterImageView);
+        if (isFavoriteMovie()) favoriteImageView.setSelected(true);
 
         titleTextView.setText(movie.getTitle());
         movieLengthTextView.setText(getString(R.string.format_movie_length, movie.getLength()));
