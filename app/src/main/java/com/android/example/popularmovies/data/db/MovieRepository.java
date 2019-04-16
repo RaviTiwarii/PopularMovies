@@ -17,7 +17,7 @@ public class MovieRepository {
 
     private final Context context;
 
-    public MovieRepository(Context context) {
+    public MovieRepository(@NonNull Context context) {
         this.context = context;
     }
 
@@ -32,7 +32,7 @@ public class MovieRepository {
         List<Movie> movies = new ArrayList<>();
         Cursor cursor = context.getContentResolver()
                 .query(MovieEntry.CONTENT_URI, null, null, null, null);
-        if (null != cursor) {
+        if (cursor != null) {
             while (cursor.moveToNext())
                 movies.add(getMovie(cursor));
             cursor.close();
@@ -44,7 +44,7 @@ public class MovieRepository {
     public Movie findById(@NonNull String movieId) {
         Uri uri = Uri.withAppendedPath(MovieEntry.CONTENT_URI, movieId);
         String selection = MovieEntry.COLUMN_ID + " = ?";
-        String[] selectionArgs = {movieId};
+        String[] selectionArgs = { movieId };
         Cursor cursor = context.getContentResolver()
                 .query(uri, null, selection, selectionArgs, null);
         Movie movie = null;

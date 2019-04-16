@@ -1,4 +1,4 @@
-package com.android.example.popularmovies.activity;
+package com.android.example.popularmovies.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.example.popularmovies.R;
-import com.android.example.popularmovies.adapter.ReviewAdapter;
-import com.android.example.popularmovies.adapter.TrailerAdapter;
+import com.android.example.popularmovies.ui.adapter.ReviewAdapter;
+import com.android.example.popularmovies.ui.adapter.TrailerAdapter;
 import com.android.example.popularmovies.data.db.MovieRepository;
 import com.android.example.popularmovies.data.model.Movie;
 import com.android.example.popularmovies.data.model.Review;
@@ -208,13 +208,13 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void displayTrailerView(@Nullable List<Trailer> trailers) {
-        if (null == trailers)
+        if (trailers == null)
             Toast.makeText(this, "Fetching trailer failed", Toast.LENGTH_SHORT).show();
         else setupTrailerAdapter(trailers);
     }
 
     private void displayReviewView(@Nullable List<Review> reviews) {
-        if (null == reviews)
+        if (reviews == null)
             Toast.makeText(this, "Fetching review failed", Toast.LENGTH_SHORT).show();
         else setupReviewAdapter(reviews);
     }

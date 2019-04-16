@@ -1,4 +1,4 @@
-package com.android.example.popularmovies.adapter;
+package com.android.example.popularmovies.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -28,8 +28,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         this.listener = listener;
     }
 
+    @NonNull
     @Override
-    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.list_item_movies, parent, false);
@@ -38,7 +39,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     @Override
-    public void onBindViewHolder(MovieViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         holder.bind(movies.get(position));
     }
 
@@ -54,16 +55,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final ImageView mMoviePosterImageView;
+        private final ImageView moviePosterImageView;
 
         MovieViewHolder(View itemView) {
             super(itemView);
-            mMoviePosterImageView = itemView.findViewById(R.id.iv_poster);
+            moviePosterImageView = itemView.findViewById(R.id.iv_poster);
             itemView.setOnClickListener(this);
         }
 
         void bind(final Movie movie) {
-            Picasso.get().load(movie.getPosterPathUrl()).into(mMoviePosterImageView);
+            Picasso.get().load(movie.getPosterPathUrl()).into(moviePosterImageView);
         }
 
         @Override

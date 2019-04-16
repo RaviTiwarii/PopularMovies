@@ -26,4 +26,5 @@
     <string name="format_movie_rating">
         <xliff:g id="rating">%1$s</xliff:g>/10
     </string>
+    <string name="api_key">key</string>
 </resources>

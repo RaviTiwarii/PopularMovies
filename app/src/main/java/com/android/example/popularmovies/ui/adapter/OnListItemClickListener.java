@@ -1,4 +1,4 @@
-package com.android.example.popularmovies.adapter;
+package com.android.example.popularmovies.ui.adapter;
 
 import android.support.annotation.NonNull;
 

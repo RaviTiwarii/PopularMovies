@@ -1,4 +1,4 @@
-package com.android.example.popularmovies.adapter;
+package com.android.example.popularmovies.ui.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -23,15 +23,16 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.ViewHold
         this.listener = listener;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_trailer, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Trailer trailer = trailers.get(position);
         holder.bind(trailer);
     }

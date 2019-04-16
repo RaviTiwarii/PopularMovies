@@ -1,4 +1,4 @@
-package com.android.example.popularmovies.activity;
+package com.android.example.popularmovies.ui.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.example.popularmovies.R;
-import com.android.example.popularmovies.adapter.MovieAdapter;
+import com.android.example.popularmovies.ui.adapter.MovieAdapter;
 import com.android.example.popularmovies.data.model.Movie;
 import com.android.example.popularmovies.data.model.MovieType;
 import com.android.example.popularmovies.network.LoadMovieTask;
@@ -26,7 +26,7 @@ public class MoviesActivity extends AppCompatActivity {
     private static final String KEY_MOVIE_LIST_STATE = "key_movie_list_state";
     private static final String KEY_SORT_TYPE = "key_sort_type";
 
-    private ProgressBar loadingIndicator;
+    private ProgressBar progressBar;
     private TextView errorMessageTextView;
     private RecyclerView movieRecyclerView;
     private MovieAdapter movieAdapter;
@@ -39,7 +39,7 @@ public class MoviesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
 
-        loadingIndicator = findViewById(R.id.pb_loading_indicator);
+        progressBar = findViewById(R.id.pb_loading_indicator);
         errorMessageTextView = findViewById(R.id.tv_error_message);
         movieRecyclerView = findViewById(R.id.recycler_view_movie);
 
@@ -127,12 +127,12 @@ public class MoviesActivity extends AppCompatActivity {
     }
 
     private void onPreTaskExecute() {
-        loadingIndicator.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     private void onTaskComplete(List<Movie> movies) {
-        loadingIndicator.setVisibility(View.INVISIBLE);
-        if (null == movies || movies.isEmpty()) {
+        progressBar.setVisibility(View.INVISIBLE);
+        if (movies == null || movies.isEmpty()) {
             showEmptyListView();
         } else {
             showMoviesView();
@@ -141,7 +141,7 @@ public class MoviesActivity extends AppCompatActivity {
     }
 
     private void setupAdapter(final List<Movie> movies) {
-        if (null == movieAdapter) {
+        if (movieAdapter == null) {
             movieAdapter = new MovieAdapter(movies, this::startMovieDetailActivity);
             movieRecyclerView.setAdapter(movieAdapter);
         } else {

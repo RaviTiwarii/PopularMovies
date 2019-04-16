@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.android.example.popularmovies.connectivity.NetworkUtils;
 import com.android.example.popularmovies.data.db.MovieRepository;
 import com.android.example.popularmovies.data.model.Movie;
 import com.android.example.popularmovies.data.model.MovieType;
@@ -29,7 +30,8 @@ public class LoadMovieTask extends AsyncTask<String, Void, List<Movie>> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        if (null != preTaskExecuteListener) preTaskExecuteListener.onPreTaskExecute();
+        if (preTaskExecuteListener != null)
+            preTaskExecuteListener.onPreTaskExecute();
     }
 
     @Override

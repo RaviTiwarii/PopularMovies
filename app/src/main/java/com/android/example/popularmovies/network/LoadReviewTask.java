@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.android.example.popularmovies.connectivity.NetworkUtils;
 import com.android.example.popularmovies.data.model.Review;
 
 import java.lang.ref.WeakReference;

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.MoviesActivity"
+        <activity android:name=".ui.activity.MoviesActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,13 +23,13 @@
         </activity>
 
         <activity
-            android:name=".activity.MovieDetailActivity"
-            android:parentActivityName=".activity.MoviesActivity"
+            android:name=".ui.activity.MovieDetailActivity"
+            android:parentActivityName=".ui.activity.MoviesActivity"
             android:label="@string/title_activity_detail_movie"
             android:configChanges="orientation|keyboardHidden|screenSize" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MoviesActivity" />
+                android:value=".ui.activity.MoviesActivity" />
         </activity>
 
         <provider

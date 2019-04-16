@@ -32,7 +32,7 @@ public class MovieProvider extends ContentProvider {
     public boolean onCreate() {
         Context context = getContext();
         assert(context != null);
-        dbHelper = new MovieDbHelper(getContext());
+        dbHelper = new MovieDbHelper(context);
         return true;
     }
 
